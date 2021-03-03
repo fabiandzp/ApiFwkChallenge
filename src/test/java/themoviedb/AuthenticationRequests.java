@@ -5,6 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import themoviedb.api.RestfulMoviesApi;
+import themoviedb.entities.Auth;
 import themoviedb.entities.RequestToken;
 import themoviedb.entities.ValidateToken;
 import themoviedb.http.HttpMessageSender;
@@ -18,6 +19,7 @@ public class AuthenticationRequests {
     private static Properties props;
     private static HttpMessageSender requestSender;
     private static RestfulMoviesApi api;
+    private static Auth auth;
 
     @BeforeClass
     public static void createTestEnvironment() {
@@ -29,12 +31,13 @@ public class AuthenticationRequests {
         }
         requestSender = new HttpMessageSender(props.getProperty("url"));
         api = new RestfulMoviesApi(props.getProperty("url"));
+        auth = new Auth(props.getProperty("apiKey"), props.getProperty("username"), props.getProperty("password"));
 
     }
 
     @Test
     public void getToken() {
-        String api_key = props.getProperty("api_key");
+        String api_key = auth.getApiKey();
         Response response = api.getToken(api_key);
         Assert.assertEquals(200, response.statusCode());
         response.then().log().body();
