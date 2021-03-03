@@ -1,4 +1,4 @@
-package themoviedb;
+package themoviedb.old;
 
 import io.restassured.response.Response;
 import org.junit.Assert;

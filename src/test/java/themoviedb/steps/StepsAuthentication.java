@@ -1,4 +1,4 @@
-package themoviedb.stepdefs;
+package themoviedb.steps;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -6,7 +6,6 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import themoviedb.api.RestfulMoviesApi;
 import themoviedb.entities.Auth;
 import themoviedb.entities.RequestToken;
@@ -34,8 +33,6 @@ public class StepsAuthentication {
         requestSender = new HttpMessageSender(props.getProperty("url"));
         api = new RestfulMoviesApi(props.getProperty("url"));
         auth = new Auth(props.getProperty("apiKey"), props.getProperty("username"), props.getProperty("password"));
-
-        //System.out.println(props.getProperty("apiKey"));
     }
 
     @Given("A have the api key")

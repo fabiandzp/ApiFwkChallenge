@@ -1,4 +1,4 @@
-package themoviedb;
+package themoviedb.old;
 
 import io.restassured.response.Response;
 import org.junit.Assert;
@@ -40,6 +40,7 @@ public class ListRequests {
         Response responseSessionId = api.tokenValidationSessionId(api_key);
         String sessionId = responseSessionId.then().extract().path("session_id");
         //java Faker -----
+
         MDBList mdbList = new MDBList("Fight Club","A Nice Movie","en");
         Response response = api.createList(mdbList, api_key, sessionId);
         response.then().log().body();
