@@ -1,18 +1,18 @@
 package themoviedb.entities.lists;
 
 public class LatestMovieId {
-    private String id;
+    private int media_id;
 
-    public String getId() {
-        return id;
+    public int getMedia_id() {
+        return media_id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setMedia_id(int media_id) {
+        this.media_id = media_id;
     }
 
-    public LatestMovieId(String id) {
-        this.id = id;
+    public LatestMovieId(int media_id) {
+        this.media_id = media_id;
     }
 
 

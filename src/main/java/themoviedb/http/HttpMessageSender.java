@@ -2,10 +2,10 @@ package themoviedb.http;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import themoviedb.entities.RequestToken;
-import themoviedb.entities.ValidateToken;
-import themoviedb.entities.lists.AddMovie;
+import themoviedb.entities.authentication.RequestToken;
+import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.entities.lists.LatestMovieId;
+import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
 import themoviedb.entities.lists.RateMovie;
 
@@ -73,13 +73,25 @@ public class HttpMessageSender {
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(AddMovie addMovie, String api_key, String session_id, String endpoint){
+    public Response postRequestToEndpoint(MovieDetails movieDetails, String api_key, String session_id, String endpoint){
         String requestUrl = url + endpoint;
         return given().
                 contentType(ContentType.JSON).with().
                 queryParam("api_key", api_key).
                 queryParam("session_id", session_id).
-                body(addMovie).log().all().
+                body(movieDetails).log().all().
+                when().
+                post(requestUrl).
+                andReturn();
+    }
+
+    public Response postRequestToEndpoint(LatestMovieId latestMovieId, String api_key, String session_id, String endpoint){
+        String requestUrl = url + endpoint;
+        return given().
+                contentType(ContentType.JSON).with().
+                queryParam("api_key", api_key).
+                queryParam("session_id", session_id).
+                body(latestMovieId).log().all().
                 when().
                 post(requestUrl).
                 andReturn();

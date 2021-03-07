@@ -1,4 +1,4 @@
-package themoviedb.entities;
+package themoviedb.entities.authentication;
 
 public class Token {
     private String success;

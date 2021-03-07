@@ -4,10 +4,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.restassured.response.Response;
-import themoviedb.entities.RequestToken;
-import themoviedb.entities.Token;
-import themoviedb.entities.ValidateToken;
-import themoviedb.entities.lists.AddMovie;
+import themoviedb.entities.authentication.RequestToken;
+import themoviedb.entities.authentication.Token;
+import themoviedb.entities.authentication.ValidateToken;
+import themoviedb.entities.lists.LatestMovieId;
+import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
 import themoviedb.entities.lists.RateMovie;
 import themoviedb.http.HttpMessageSender;
@@ -97,9 +98,14 @@ public class RestfulMoviesApi {
         return messageSender.getRequestToEndpoint(api_key, "/movie/latest");
     }
 
-    public Response addMovieToList(AddMovie addMovie, String api_key, String sessionId, int listId) {
-        return messageSender.postRequestToEndpoint(addMovie, api_key, sessionId, "/list/"+listId+"/add_item");
+    public Response addMovieToList(MovieDetails movieDetails, String api_key, String sessionId, int listId) {
+        return messageSender.postRequestToEndpoint(movieDetails, api_key, sessionId, "/list/"+listId+"/add_item");
     }
+
+    public Response addMovieToList(LatestMovieId latestMovieId, String api_key, String sessionId, int listId) {
+        return messageSender.postRequestToEndpoint(latestMovieId, api_key, sessionId, "/list/"+listId+"/add_item");
+    }
+
 
     public Response clearList(String api_key, String session_id, int listId) {
         return messageSender.postRequestToEndpoint(api_key, session_id, "/list/"+listId+"/clear");
@@ -119,6 +125,10 @@ public class RestfulMoviesApi {
 
     public Response rateMovie(RateMovie rateMovie, String api_key, String gSessionId, int movieId) {
         return messageSender.postRequestToEndpoint(rateMovie, api_key, gSessionId, "/movie/"+movieId+"/rating");
+    }
+
+    public Response getListDetails(int listId, String apiKey) {
+        return messageSender.getRequestToEndpoint(apiKey, "/list/" + listId);
     }
     // Get List Details
 

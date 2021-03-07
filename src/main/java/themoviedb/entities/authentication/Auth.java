@@ -1,4 +1,4 @@
-package themoviedb.entities;
+package themoviedb.entities.authentication;
 
 public class Auth {
     private static String username;

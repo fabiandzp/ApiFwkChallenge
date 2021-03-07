@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import themoviedb.api.RestfulMoviesApi;
-import themoviedb.entities.lists.AddMovie;
+import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
 import themoviedb.helpers.VariableTools;
 import themoviedb.http.HttpMessageSender;
@@ -47,6 +47,8 @@ public class ListRequests {
         Assert.assertEquals("The status code is different than 201", 201, response.statusCode());
     }
 
+
+
     @Test
     public void addMovie(){
         String api_key = props.getProperty("api_key");
@@ -65,8 +67,8 @@ public class ListRequests {
         Assert.assertEquals("The status code is different than 201", 201, response.statusCode());
 
         //Add a movie to the list
-        AddMovie addMovie = new AddMovie(movieId);
-        Response responseAddMovie = api.addMovieToList(addMovie, api_key, sessionId, listId);
+        MovieDetails movieDetails = new MovieDetails(movieId);
+        Response responseAddMovie = api.addMovieToList(movieDetails, api_key, sessionId, listId);
         responseAddMovie.then().log().body();
         Assert.assertEquals("The status code is different than 201", 201, responseAddMovie.statusCode());
     }

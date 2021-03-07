@@ -7,9 +7,9 @@ import io.cucumber.java.en.When;
 import io.restassured.response.Response;
 import org.junit.Assert;
 import themoviedb.api.RestfulMoviesApi;
-import themoviedb.entities.Auth;
-import themoviedb.entities.RequestToken;
-import themoviedb.entities.ValidateToken;
+import themoviedb.entities.authentication.Auth;
+import themoviedb.entities.authentication.RequestToken;
+import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;

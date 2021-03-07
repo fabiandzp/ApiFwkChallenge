@@ -1,4 +1,4 @@
-package themoviedb.entities;
+package themoviedb.entities.authentication;
 
 public class RequestToken {
     private String request_token;

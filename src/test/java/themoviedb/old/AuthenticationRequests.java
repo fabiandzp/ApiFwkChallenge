@@ -5,9 +5,9 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import themoviedb.api.RestfulMoviesApi;
-import themoviedb.entities.Auth;
-import themoviedb.entities.RequestToken;
-import themoviedb.entities.ValidateToken;
+import themoviedb.entities.authentication.Auth;
+import themoviedb.entities.authentication.RequestToken;
+import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;
