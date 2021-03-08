@@ -4,24 +4,30 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.restassured.response.Response;
+
+import org.apache.logging.log4j.Logger;
 import themoviedb.entities.authentication.RequestToken;
 import themoviedb.entities.authentication.Token;
 import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.entities.lists.LatestMovieId;
 import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
-import themoviedb.entities.lists.RateMovie;
+import themoviedb.entities.movies.RateMovie;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
+
 public class RestfulMoviesApi {
     private final String url;
     private final HttpMessageSender messageSender;
     private static Properties props;
     private JsonParser parser = new JsonParser();
+    private static final Logger log = getLogger();
 
     public RestfulMoviesApi(String url) {
         this.url = url;

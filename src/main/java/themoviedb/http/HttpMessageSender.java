@@ -7,7 +7,7 @@ import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.entities.lists.LatestMovieId;
 import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
-import themoviedb.entities.lists.RateMovie;
+import themoviedb.entities.movies.RateMovie;
 
 import static io.restassured.RestAssured.given;
 
@@ -102,7 +102,7 @@ public class HttpMessageSender {
         return given().
                 contentType(ContentType.JSON).with().
                 queryParam("api_key", api_key).
-                queryParam("guest_session_id", gSessionId).
+                queryParam("session_id", gSessionId).
                 body(rateMovie).log().all().
                 when().
                 post(requestUrl).

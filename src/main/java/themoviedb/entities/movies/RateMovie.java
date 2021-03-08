@@ -1,4 +1,4 @@
-package themoviedb.entities.lists;
+package themoviedb.entities.movies;
 
 public class RateMovie {
     private int value;
