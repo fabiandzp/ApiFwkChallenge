@@ -5,6 +5,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import themoviedb.api.RestfulMoviesApi;
 import themoviedb.entities.authentication.Auth;
@@ -16,12 +17,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import static org.apache.logging.log4j.LogManager.getLogger;
+
 public class StepsAuthentication {
 
     private static Properties props;
     private static HttpMessageSender requestSender;
     private static RestfulMoviesApi api;
     private static Auth auth;
+    private static final Logger log = getLogger(StepsAuthentication.class.getName());
 
     public static void createTestEnvironment() {
         props = new Properties();
@@ -33,10 +37,11 @@ public class StepsAuthentication {
         requestSender = new HttpMessageSender(props.getProperty("url"));
         api = new RestfulMoviesApi(props.getProperty("url"));
         auth = new Auth(props.getProperty("apiKey"), props.getProperty("username"), props.getProperty("password"));
+        log.info("Environment variables set");
     }
 
-    @Given("A have the api key")
-    public void aHaveTheApiKey() {
+    @Given("I have the api key")
+    public void IHaveTheApiKey() {
         createTestEnvironment();
         System.out.println("The API Key is set as: " + auth.getApiKey());
     }

@@ -5,7 +5,7 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import themoviedb.api.RestfulMoviesApi;
-import themoviedb.entities.lists.RateMovie;
+import themoviedb.entities.movies.RateMovie;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;

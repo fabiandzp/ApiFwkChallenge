@@ -1,27 +1,33 @@
 package themoviedb.api;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+//import com.google.gson.Gson;
+//import com.google.gson.JsonElement;
+//import com.google.gson.JsonParser;
 import io.restassured.response.Response;
+
+//import org.apache.logging.log4j.Logger;
 import themoviedb.entities.authentication.RequestToken;
 import themoviedb.entities.authentication.Token;
 import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.entities.lists.LatestMovieId;
 import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
-import themoviedb.entities.lists.RateMovie;
+import themoviedb.entities.movies.RateMovie;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+//import static org.apache.logging.log4j.LogManager.getLogger;
+
+
 public class RestfulMoviesApi {
     private final String url;
     private final HttpMessageSender messageSender;
     private static Properties props;
-    private JsonParser parser = new JsonParser();
+    //private JsonParser parser = new JsonParser();
+    //private static final Logger log = getLogger();
 
     public RestfulMoviesApi(String url) {
         this.url = url;
@@ -41,7 +47,7 @@ public class RestfulMoviesApi {
     }
 
 
-    public Token getNewToken() {
+    /*public Token getNewToken() {
         props = new Properties();
         try {
             props.load(new FileInputStream("application.properties"));
@@ -57,7 +63,7 @@ public class RestfulMoviesApi {
         System.out.println("This is the Token " + token.getExpires_at());
         System.out.println("This is the Token " + token.getRequest_token());
         return token;
-    }
+    }*/
 
     // Session ID
     public Response sessionId(RequestToken requestToken, String api_key){
@@ -130,18 +136,8 @@ public class RestfulMoviesApi {
     public Response getListDetails(int listId, String apiKey) {
         return messageSender.getRequestToEndpoint(apiKey, "/list/" + listId);
     }
-    // Get List Details
 
-    // Add Movie
 
-    // Clear the list
-
-    // Delete List
-
-    // ### Movies
-    // Get Movie Details
-
-    // Rate Movie
 
 
 }
