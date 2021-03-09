@@ -41,7 +41,8 @@ public class RestfulMoviesApi {
 
     // Validate Token
     public Response validateToken(ValidateToken validateToken, String api_key){
-        return messageSender.postRequestToEndpoint(validateToken, "/authentication/token/validate_with_login?api_key=" + api_key);
+        return messageSender.postRequestToEndpoint(validateToken,
+                "/authentication/token/validate_with_login?api_key=" + api_key);
     }
 
 
@@ -65,7 +66,8 @@ public class RestfulMoviesApi {
 
     // Session ID
     public Response sessionId(RequestToken requestToken, String api_key){
-        return messageSender.postRequestToEndpoint(requestToken, "/authentication/session/new?api_key=" + api_key);
+        return messageSender.postRequestToEndpoint(requestToken,
+                "/authentication/session/new?api_key=" + api_key);
     }
 
     public Response tokenValidationSessionId(String api_key) {
@@ -103,11 +105,13 @@ public class RestfulMoviesApi {
     }
 
     public Response addMovieToList(MovieDetails movieDetails, String api_key, String sessionId, int listId) {
-        return messageSender.postRequestToEndpoint(movieDetails, api_key, sessionId, "/list/"+listId+"/add_item");
+        return messageSender.postRequestToEndpoint(movieDetails, api_key, sessionId,
+                "/list/"+listId+"/add_item");
     }
 
     public Response addMovieToList(LatestMovieId latestMovieId, String api_key, String sessionId, int listId) {
-        return messageSender.postRequestToEndpoint(latestMovieId, api_key, sessionId, "/list/"+listId+"/add_item");
+        return messageSender.postRequestToEndpoint(latestMovieId, api_key, sessionId,
+                "/list/"+listId+"/add_item");
     }
 
 

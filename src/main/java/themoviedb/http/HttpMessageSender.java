@@ -29,12 +29,12 @@ public class HttpMessageSender {
         return response;
     }
 
-    public Response getRequestToEndpoint(String api_key, String endpoint) {
+    public Response getRequestToEndpoint(String apiKey, String endpoint) {
         String requestUrl = url + endpoint;
         Response response =
                 given().log().uri().
                     contentType(ContentType.JSON).with().
-                    queryParam("api_key", api_key).
+                    queryParam("api_key", apiKey).
                 when().
                     get(requestUrl).
                         andReturn();
@@ -43,9 +43,10 @@ public class HttpMessageSender {
 
     public Response postRequestToEndpoint(ValidateToken validateToken, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                     contentType(ContentType.JSON).
-                    body(validateToken).log().all().
+                    body(validateToken).
+                //log().body().
                 when().
                     post(requestUrl).
                     andReturn();
@@ -53,82 +54,87 @@ public class HttpMessageSender {
 
     public Response postRequestToEndpoint(RequestToken requestToken, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                     contentType(ContentType.JSON).
-                    body(requestToken).log().all().
+                    body(requestToken).
+                //log().body().
                 when().
                     post(requestUrl).
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(MDBList list, String api_key, String session_id, String endpoint){
+    public Response postRequestToEndpoint(MDBList list, String apiKey, String sessionId, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                     contentType(ContentType.JSON).with().
-                    queryParam("api_key", api_key).
-                    queryParam("session_id", session_id).
-                    body(list).log().all().
+                    queryParam("api_key", apiKey).
+                    queryParam("session_id", sessionId).
+                    body(list).
+                //log().body().
                 when().
                     post(requestUrl).
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(MovieDetails movieDetails, String api_key, String session_id, String endpoint){
+    public Response postRequestToEndpoint(MovieDetails movieDetails, String apiKey, String sessionId, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                 contentType(ContentType.JSON).with().
-                queryParam("api_key", api_key).
-                queryParam("session_id", session_id).
-                body(movieDetails).log().all().
+                queryParam("api_key", apiKey).
+                queryParam("session_id", sessionId).
+                body(movieDetails).
+                //log().body().
                 when().
                 post(requestUrl).
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(LatestMovieId latestMovieId, String api_key, String session_id, String endpoint){
+    public Response postRequestToEndpoint(LatestMovieId latestMovieId, String apiKey, String sessionId, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                 contentType(ContentType.JSON).with().
-                queryParam("api_key", api_key).
-                queryParam("session_id", session_id).
-                body(latestMovieId).log().all().
+                queryParam("api_key", apiKey).
+                queryParam("session_id", sessionId).
+                body(latestMovieId).
+                //log().body().
                 when().
                 post(requestUrl).
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(RateMovie rateMovie, String api_key, String gSessionId, String endpoint){
+    public Response postRequestToEndpoint(RateMovie rateMovie, String apiKey, String gSessionId, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                 contentType(ContentType.JSON).with().
-                queryParam("api_key", api_key).
+                queryParam("api_key", apiKey).
                 queryParam("session_id", gSessionId).
-                body(rateMovie).log().all().
+                body(rateMovie).
+                //log().body().
                 when().
                 post(requestUrl).
                 andReturn();
     }
 
-    public Response postRequestToEndpoint(String api_key, String sessionId, String endpoint){
+    public Response postRequestToEndpoint(String apiKey, String sessionId, String endpoint){
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                 contentType(ContentType.JSON).with().
-                queryParam("api_key", api_key).
+                queryParam("api_key", apiKey).
                 queryParam("session_id", sessionId).
                 queryParam("confirm", true).
-                log().all().
+                //log().body().
                 when().
                 post(requestUrl).
                 andReturn();
     }
 
-    public Response deleteRequestToEndpoint(String api_key, String session_id, String endpoint) {
+    public Response deleteRequestToEndpoint(String apiKey, String sessionId, String endpoint) {
         String requestUrl = url + endpoint;
-        return given().
+        return given().log().uri().
                 contentType(ContentType.JSON).with().
-                queryParam("api_key", api_key).
-                queryParam("session_id", session_id).
-                log().all().
+                queryParam("api_key", apiKey).
+                queryParam("session_id", sessionId).
+                //log().body().
                 when().
                 delete(requestUrl).
                 andReturn();
