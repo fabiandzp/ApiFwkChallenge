@@ -3,15 +3,13 @@ package themoviedb.api;
 //import com.google.gson.Gson;
 //import com.google.gson.JsonElement;
 //import com.google.gson.JsonParser;
-import io.restassured.response.Response;
 
-//import org.apache.logging.log4j.Logger;
+import io.restassured.response.Response;
 import themoviedb.entities.authentication.RequestToken;
-import themoviedb.entities.authentication.Token;
 import themoviedb.entities.authentication.ValidateToken;
 import themoviedb.entities.lists.LatestMovieId;
-import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.lists.MDBList;
+import themoviedb.entities.movies.MovieDetails;
 import themoviedb.entities.movies.RateMovie;
 import themoviedb.http.HttpMessageSender;
 
