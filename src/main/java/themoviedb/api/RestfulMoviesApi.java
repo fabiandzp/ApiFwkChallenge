@@ -136,6 +136,11 @@ public class RestfulMoviesApi {
     }
 
 
+    public Response getLatestTv(String apiKey) {
+        return messageSender.getRequestToEndpoint(apiKey, "/tv/latest");
+    }
 
-
+    public Response getTvDetails(String apiKey, int tvId) {
+        return messageSender.getRequestToEndpoint(apiKey, "/tv/" + tvId);
+    }
 }

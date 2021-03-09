@@ -1,24 +1,26 @@
 package themoviedb.steps;
 
-import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.restassured.response.Response;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import themoviedb.api.RestfulMoviesApi;
 import themoviedb.entities.authentication.Auth;
-import themoviedb.entities.lists.LatestMovieId;
-import themoviedb.entities.lists.List;
 import themoviedb.entities.authentication.RequestToken;
 import themoviedb.entities.authentication.ValidateToken;
-import themoviedb.entities.movies.MovieDetails;
+import themoviedb.entities.lists.LatestMovieId;
+import themoviedb.entities.lists.List;
 import themoviedb.entities.lists.MDBList;
+import themoviedb.entities.movies.MovieDetails;
 import themoviedb.http.HttpMessageSender;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
+
+import static org.apache.logging.log4j.LogManager.getLogger;
 
 public class StepsLists {
 
@@ -28,13 +30,14 @@ public class StepsLists {
     private static Auth auth;
     private static List list;
     private static MovieDetails movieDetails;
+    private static final Logger log = getLogger(StepsAuthentication.class.getName());
 
     public static void createTestEnvironment() {
         props = new Properties();
         try {
             props.load(new FileInputStream("application.properties"));
         } catch (IOException e) {
-            System.out.println("Error in File properties Reading");
+            log.debug("Error in File properties Reading");
         }
         requestSender = new HttpMessageSender(props.getProperty("url"));
         api = new RestfulMoviesApi(props.getProperty("url"));
@@ -56,7 +59,7 @@ public class StepsLists {
         Response responseSessionId = api.sessionId(reqToken, auth.getApiKey());
         responseSessionId.then().log().body();
         String sessionId = responseSessionId.then().extract().path("session_id");
-        //System.out.println("testtttt" + sessionId);
+        //log.debug("testtttt" + sessionId);
         boolean success = responseSessionId.then().extract().path("success");
         auth.setSessionId(sessionId);
         auth.setSessionValidation(success);
@@ -65,7 +68,7 @@ public class StepsLists {
     @Given("I am already login into the API")
     public void LoginIntoTheAPI(){
         createTestEnvironment();
-        System.out.println("Login and SessionId Successful: " + auth.getSessionId());
+        log.debug("Login and SessionId Successful: " + auth.getSessionId());
     }
 
     @When("A user sends a request to the Create List endpoint")
@@ -85,7 +88,7 @@ public class StepsLists {
     @Then("A new list is Created")
     public void listValidation(){
         Assert.assertTrue("The List creation failed", list.getListCreationValidation());
-        System.out.println("The List id created is " + list.getListId());
+        log.debug("The List id created is " + list.getListId());
     }
 
     @When("A user sends a request to the Get Details endpoint")
@@ -102,9 +105,9 @@ public class StepsLists {
     public void theResponseShowsTheListIdDescriptionAndCreatedByFields() {
         Assert.assertNotEquals("Descrition OK", null, list.getDescription());
         Assert.assertNotEquals("Created By OK", null, list.getCreatedBy());
-        System.out.println("List Id : "  + list.getListId());
-        System.out.println("List Description: " + list.getDescription());
-        System.out.println("Created By: " + list.getCreatedBy());
+        log.debug("List Id : "  + list.getListId());
+        log.debug("List Description: " + list.getDescription());
+        log.debug("Created By: " + list.getCreatedBy());
     }
 
     @When("A user sends a request to Add Movie endpoint")
