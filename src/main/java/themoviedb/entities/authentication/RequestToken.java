@@ -5,7 +5,6 @@ public class RequestToken {
 
     public RequestToken(String request_token) {
         this.request_token = request_token;
-        //System.out.println("Token Stored -> " + getRequest_token());
     }
 
     public String getRequest_token() {

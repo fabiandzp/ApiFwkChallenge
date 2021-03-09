@@ -32,7 +32,7 @@ public class StepsAuthentication {
         try {
             props.load(new FileInputStream("application.properties"));
         } catch (IOException e) {
-            System.out.println("Error in File properties Reading");
+            log.info("Error in File properties Reading");
         }
         requestSender = new HttpMessageSender(props.getProperty("url"));
         api = new RestfulMoviesApi(props.getProperty("url"));
@@ -43,7 +43,7 @@ public class StepsAuthentication {
     @Given("I have the api key")
     public void IHaveTheApiKey() {
         createTestEnvironment();
-        System.out.println("The API Key is set as: " + auth.getApiKey());
+        log.info("The API Key is set as: " + auth.getApiKey());
     }
 
     @When("A user sends a request to the authentication endpoint")
@@ -69,7 +69,7 @@ public class StepsAuthentication {
 
     @And("Token already generated")
     public void tokenAlreadyGenerated() {
-        System.out.println("The Actual Token generated is: " + auth.getRequestToken());
+        log.info("The Actual Token generated is: " + auth.getRequestToken());
     }
 
     @When("A user sends a request to validate token endpoint")
@@ -90,7 +90,7 @@ public class StepsAuthentication {
     @Then("The Token is validated successfully")
     public void theTokenIsValidatedSuccessfully() {
         Assert.assertTrue("Token validation was failed", auth.getTokenValidation());
-        System.out.println("The status of Token Validation is: " + auth.getTokenValidation());
+        log.info("The status of Token Validation is: " + auth.getTokenValidation());
     }
 
 
