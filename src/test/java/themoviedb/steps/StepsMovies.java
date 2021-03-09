@@ -56,19 +56,18 @@ public class StepsMovies {
         responseTokenValidation.then().log().body();
 
         //Realizar validacion de token
-
         RequestToken reqToken = new RequestToken(auth.getRequestToken());
         Response responseSessionId = api.sessionId(reqToken, auth.getApiKey());
         responseSessionId.then().log().body();
         String sessionId = responseSessionId.then().extract().path("session_id");
-        //log.debug("testtttt" + sessionId);
+
         boolean success = responseSessionId.then().extract().path("success");
         auth.setSessionId(sessionId);
         auth.setSessionValidation(success);
     }
 
     @Given("I am already logged into the API")
-    public void LoginIntoTheAPI(){
+    public void loginIntoTheAPI(){
         createTestEnvironment();
         log.debug("Login and SessionId Successful: " + auth.getSessionId());
     }
@@ -77,7 +76,8 @@ public class StepsMovies {
     @When("A user sends a request to get the last Movie Id")
     public void aUserSendsARequestToGetTheLastMovieId() {
         Response responseLatestMovie = api.getLatestMovieId(auth.getApiKey());
-        Assert.assertEquals("The status code is different than 200", 200, responseLatestMovie.statusCode());
+        Assert.assertEquals("The status code is different than 200", 200,
+                responseLatestMovie.statusCode());
         responseLatestMovie.then().log().body();
 
         int movieId = responseLatestMovie.then().extract().path("id");
@@ -87,7 +87,8 @@ public class StepsMovies {
     @Then("A new sends a request to get the Movie Details")
     public void aNewSendsARequestToGetTheMovieDetails() {
         Response responseMovieDetails = api.getMovieDetails(auth.getApiKey(), latestMovie.getLatestMovieId());
-        Assert.assertEquals("The status code is different than 200", 200, responseMovieDetails.statusCode());
+        Assert.assertEquals("The status code is different than 200", 200,
+                responseMovieDetails.statusCode());
 
         responseMovieDetails.then().log().body();
     }
@@ -95,14 +96,17 @@ public class StepsMovies {
     @Then("The user sends request to Rate the Movie")
     public void theUserSendsRequestToRateTheMovie() {
         Response responseMovieDetails = api.getMovieDetails(auth.getApiKey(), latestMovie.getLatestMovieId());
-        Assert.assertEquals("The status code is different than 200", 200, responseMovieDetails.statusCode());
+        Assert.assertEquals("The status code is different than 200", 200,
+                responseMovieDetails.statusCode());
 
         responseMovieDetails.then().log().body();
 
         RateMovie rateMovie = new RateMovie(9);
-        Response responseRateMovie = api.rateMovie(rateMovie, auth.getApiKey(), auth.getSessionId(), latestMovie.getLatestMovieId());
+        Response responseRateMovie = api.rateMovie(rateMovie, auth.getApiKey(), auth.getSessionId(),
+                latestMovie.getLatestMovieId());
         responseRateMovie.then().log().body();
-        Assert.assertEquals("The status code is different than 201", 201, responseRateMovie.statusCode());
+        Assert.assertEquals("The status code is different than 201", 201,
+                responseRateMovie.statusCode());
 
     }
 

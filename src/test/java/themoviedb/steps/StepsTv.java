@@ -49,7 +49,6 @@ public class StepsTv {
         responseTokenValidation.then().log().body();
 
         //Realizar validacion de token
-
         RequestToken reqToken = new RequestToken(auth.getRequestToken());
         Response responseSessionId = api.sessionId(reqToken, auth.getApiKey());
         responseSessionId.then().log().body();
@@ -61,7 +60,7 @@ public class StepsTv {
     }
 
     @Given("I am already logged at the API")
-    public void LoginIntoTheAPI(){
+    public void loginIntoTheAPI(){
         createTestEnvironment();
         log.debug("Login and SessionId Successful: " + auth.getSessionId());
     }
@@ -70,7 +69,7 @@ public class StepsTv {
     @When("A user sends a request to get the last Tv show Id")
     public void aUserSendsARequestToGetTheLastTvShowId() {
         Response response = api.getLatestTv(auth.getApiKey());
-        Assert.assertEquals("The status code is different than 200", 200, response.statusCode());
+        Assert.assertEquals("The status code is different than 200", 201, response.statusCode());
         int tvId = response.then().extract().path("id");
         tv.setTvId(tvId);
 

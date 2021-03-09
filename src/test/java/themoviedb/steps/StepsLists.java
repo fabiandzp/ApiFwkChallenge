@@ -54,19 +54,18 @@ public class StepsLists {
         responseTokenValidation.then().log().body();
 
         //Realizar validacion de token
-
         RequestToken reqToken = new RequestToken(auth.getRequestToken());
         Response responseSessionId = api.sessionId(reqToken, auth.getApiKey());
         responseSessionId.then().log().body();
         String sessionId = responseSessionId.then().extract().path("session_id");
-        //log.debug("testtttt" + sessionId);
+
         boolean success = responseSessionId.then().extract().path("success");
         auth.setSessionId(sessionId);
         auth.setSessionValidation(success);
     }
 
     @Given("I am already login into the API")
-    public void LoginIntoTheAPI(){
+    public void loginIntoTheAPI(){
         createTestEnvironment();
         log.debug("Login and SessionId Successful: " + auth.getSessionId());
     }
@@ -126,7 +125,7 @@ public class StepsLists {
     @Then("The movie listed in the List Details endpoint")
     public void theMovieIsAddedToTheList() {
         Response response = api.getListDetails(list.getListId(), auth.getApiKey());
-        Assert.assertEquals("The status code is different than 201", 200, response.statusCode());
+        Assert.assertEquals("The status code is different than 200", 200, response.statusCode());
         response.then().log().body();
 
         String listDescription = response.then().extract().path("description");
@@ -138,7 +137,8 @@ public class StepsLists {
         list.setDescription(listDescription);
         list.setCreatedBy(createdBy);
 
-        Assert.assertEquals("The actual movie does not match", movieDetails.getLatestMovieId(), movieDetails.getmovieId());
+        Assert.assertEquals("The actual movie does not match", movieDetails.getLatestMovieId(),
+                movieDetails.getmovieId());
     }
 
 
@@ -170,7 +170,8 @@ public class StepsLists {
         response.then().log().body();
 
         String status_message = response.then().extract().path("status_message");
-        Assert.assertEquals("Status Message is wrong", "The resource you requested could not be found.", status_message);
+        Assert.assertEquals("Status Message is wrong", "The resource you requested could not be found.",
+                status_message);
     }
 }
 
